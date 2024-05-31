@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PageContentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -11,9 +12,9 @@ Route::group(['middleware' => "auth"], function () {
         return view('home');
     });
 
-    Route::get('/page-content', function () {
-        return view('page-content.index');
-    });
+    Route::get('/page-content/main', [PageContentController::class, 'main']);
+    Route::get('/page-content/products', [PageContentController::class, 'products']);
+    Route::get('/page-content/articles', [PageContentController::class, 'articles']);
 
     Route::get('/products', function () {
         return view('products.index');

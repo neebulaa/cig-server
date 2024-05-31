@@ -15,7 +15,7 @@
                     class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 mb-1 font-medium">
                     Username</label>
                 <input placeholder="Your Username" type="text" id="login-username" name="username"
-                    class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal border focus:border-2 text-sm px-3 py-3 rounded-md border-blue-gray-200 focus:border-gray-900 @error('username') border-red-500 @enderror"
+                    class="w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal border focus:border-2 text-sm px-3 py-3 rounded-md border-blue-gray-200 focus:border-gray-900 @error('username') border-red-500 @enderror"
                     value={{ old('username', '') }} />
                 @error('username')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -26,7 +26,7 @@
                     class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 mb-1 font-medium">
                     Password</label>
                 <input placeholder="Your Password" type="password" id="login-password" name="password"
-                    class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal border focus:border-2 text-sm px-3 py-3 rounded-md border-blue-gray-200 focus:border-gray-900 @error('password') border-red-500 @enderror" />
+                    class="w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal border focus:border-2 text-sm px-3 py-3 rounded-md border-blue-gray-200 focus:border-gray-900 @error('password') border-red-500 @enderror" />
                 @error('password')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror

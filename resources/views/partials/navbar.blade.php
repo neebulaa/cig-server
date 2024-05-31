@@ -15,7 +15,7 @@
             </nav>
             <h6
                 class="capitalize block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900">
-                {{ Request::path('') == '/' ? 'Welcome' : Request::path('') }} Page
+                {{ Request::path('') == '/' ? 'Welcome' : implode(' ', explode('-', Request::path(''))) }} Page
             </h6>
         </div>
         <div class="flex gap-1 items-center">

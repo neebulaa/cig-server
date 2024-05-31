@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('page_contents', function (Blueprint $table) {
+        Schema::create('page_content_values', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->enum('type', ['text', 'button', 'textarea', 'filters'])->default('text');
-            $table->string('page');
-            $table->string('title');
+            $table->foreignId('page_content_id')->constrained('page_contents')->onDelete('cascade');
+            $table->text('value');
+            $table->enum('type', ['text', 'link', 'filter'])->default('text');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('page_contents');
+        Schema::dropIfExists('page_content_values');
     }
 };

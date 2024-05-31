@@ -25,5 +25,9 @@ class DatabaseSeeder extends Seeder
             "username" => "owner",
             "password" => "owner"
         ]);
+
+        $this->call([
+            PageContentSeeder::class
+        ]);
     }
 }

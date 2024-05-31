@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@
             <div class="p-4 xl:ml-80">
                 @include('partials.navbar')
 
-                <div class="mx-auto my-5 flex px-2 flex-col gap-8">
+                <div class="mx-auto my-5 px-2">
                     @yield('content')
                 </div>
             </div>
