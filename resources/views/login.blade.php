@@ -16,7 +16,7 @@
                     Username</label>
                 <input placeholder="Your Username" type="text" id="login-username" name="username"
                     class="w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal border focus:border-2 text-sm px-3 py-3 rounded-md border-blue-gray-200 focus:border-gray-900 @error('username') border-red-500 @enderror"
-                    value={{ old('username', '') }} />
+                    value="{{ old('username', '') }}" />
                 @error('username')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror

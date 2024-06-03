@@ -1,5 +1,5 @@
 <nav
-    class="block backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border border-white/80 w-full max-w-full px-4 bg-white text-white rounded-xl transition-all sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5">
+    class="block backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border border-white/80 w-full max-w-full px-4 bg-white text-white rounded-xl transition-all sticky top-4 z-10 py-3 shadow-md shadow-blue-gray-500/5">
     <div class="flex justify-between gap-6 md:flex-row md:items-center">
         <div class="">
             <nav aria-label="breadcrumb" class="w-max">
