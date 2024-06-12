@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('benefits', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->text('description');
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }

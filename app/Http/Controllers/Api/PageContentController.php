@@ -16,8 +16,8 @@ class PageContentController extends Controller
         foreach ($page_content->values as $index => $page_content_value) {
             $rules["{$page_content_value->type}_" . $index + 1] = [
                 'required',
-                'string',
-                "min:3"
+                $page_content_value->type == 'table_filters' ? 'array' : 'string',
+                $page_content_value->type == 'table_filters' ? 'min:1' : "min:3"
             ];
         }
         $validator = Validator::make($request->all(), $rules, [
@@ -34,8 +34,10 @@ class PageContentController extends Controller
 
         $validated_data = $validator->validated();
         foreach ($page_content->values as $index => $page_content_value) {
+            $value = $validated_data["{$page_content_value->type}_" . $index + 1];
+            $value = is_array($value) ? implode(',', $value) : $value;
             $page_content_value->update([
-                "value" => $validated_data["{$page_content_value->type}_" . $index + 1]
+                "value" => $value
             ]);
         }
 

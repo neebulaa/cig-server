@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            body {
+                box-sizing: border-box;
+                background: #111;
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <div id="map">
+            <img
+                src="Map Pin.png"
+                alt="pin map"
+                id="pinpoint-draggable"
+                draggable="false"
+            />
+            <img src="map-white.png" alt="white map" id="map-img" />
+        </div>
+
+        <script>
+            const map = document.querySelector("#map");
+            const pinpoint = document.querySelector("#pinpoint-draggable");
+
+            const movement = {
+                x: 0,
+                y: 0,
+                click: false,
+            };
+
+            pinpoint.addEventListener("mousedown", function (e) {
+                movement.click = true;
+                movement.x = e.clientX;
+                movement.y = e.clientY;
+            });
+
+            pinpoint.addEventListener("mouseup", function (e) {
+                movement.click = false;
+            });
+
+            pinpoint.addEventListener("mouseleave", function (e) {
+                movement.click = false;
+            });
+
+            map.addEventListener("mouseleave", function (e) {
+                movement.click = false;
+            });
+
+            map.addEventListener("mousemove", function (e) {
+                if (!movement.click) return;
+                const mapRect = map.getBoundingClientRect();
+                const pinpointRect = pinpoint.getBoundingClientRect();
+
+                const xDelta = e.clientX - movement.x;
+                const yDelta = e.clientY - movement.y;
+
+                const prevYPercentage = parseInt(
+                    getCustomProperty(pinpoint, "--top-px")
+                );
+                const prevXPercentage = parseInt(
+                    getCustomProperty(pinpoint, "--left-px")
+                );
+
+                let newXPx = xDelta + prevXPercentage;
+                let newYPx = yDelta + prevYPercentage;
+
+                // check if pinpoint already exceed map box
+                if (newXPx <= 0) {
+                    newXPx = 0;
+                }
+
+                if (newXPx + pinpointRect.width >= mapRect.width) {
+                    newXPx = mapRect.width - pinpointRect.width;
+                }
+
+                if (newYPx <= 0) {
+                    newYPx = 0;
+                }
+
+                if (newYPx + pinpointRect.height >= mapRect.height) {
+                    newYPx = mapRect.height - pinpointRect.height;
+                }
+
+                const newXPercent = (newXPx / mapRect.width) * 100;
+                const newYPercent = (newYPx / mapRect.height) * 100;
+
+                setCustomElementProperty(pinpoint, "--top-px", newYPx);
+                setCustomElementProperty(pinpoint, "--left-px", newXPx);
+                setCustomElementProperty(
+                    pinpoint,
+                    "--left-percent",
+                    newXPercent
+                );
+                setCustomElementProperty(
+                    pinpoint,
+                    "--top-percent",
+                    newYPercent
+                );
+
+                movement.x = e.clientX;
+                movement.y = e.clientY;
+            });
+
+            function getCustomProperty(element, variable) {
+                return getComputedStyle(element).getPropertyValue(variable);
+            }
+
+            function setCustomElementProperty(element, variable, value) {
+                element.style.setProperty(variable, value);
+            }
+        </script>
+    </body>
+</html>

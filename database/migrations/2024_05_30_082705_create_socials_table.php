@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Social;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,9 @@ return new class extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained('companies', 'id')->onDelete('cascade');
+            $table->enum('type', array_keys(Social::$social_medias));
+            $table->string('link');
             $table->timestamps();
         });
     }

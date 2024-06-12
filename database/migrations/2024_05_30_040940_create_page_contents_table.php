@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('page_contents', function (Blueprint $table) {
             $table->id();
             $table->string('key');
-            $table->enum('type', ['text', 'button', 'textarea', 'filters'])->default('text');
             $table->string('page');
             $table->string('title');
             $table->timestamps();

@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('page_content_values', function (Blueprint $table) {
             $table->id();
             $table->foreignId('page_content_id')->constrained('page_contents')->onDelete('cascade');
+            $table->string('name');
             $table->text('value');
-            $table->enum('type', ['text', 'link', 'filter'])->default('text');
+            $table->enum('type', ['text', 'textarea', 'table_filters'])->default('text');
             $table->timestamps();
         });
     }

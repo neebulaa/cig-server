@@ -9,13 +9,12 @@
     @endif
     <form class="mt-6 mb-2 mx-auto max-w-screen-lg" method="post">
         @csrf
-        <div class="mb-1 flex flex-col gap-6">
+        <div class="mb-1 flex flex-col gap-4">
             <div>
-                <label for="login-username"
-                    class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 mb-1 font-medium">
+                <label for="login-username" class="block mb-2 text-sm font-sans font-medium text-gray-900 dark:text-white">
                     Username</label>
                 <input placeholder="Your Username" type="text" id="login-username" name="username"
-                    class="w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal border focus:border-2 text-sm px-3 py-3 rounded-md border-blue-gray-200 focus:border-gray-900 @error('username') border-red-500 @enderror"
+                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('username') border-red-500 @enderror"
                     value="{{ old('username', '') }}" />
                 @error('username')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -26,7 +25,7 @@
                     class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 mb-1 font-medium">
                     Password</label>
                 <input placeholder="Your Password" type="password" id="login-password" name="password"
-                    class="w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal border focus:border-2 text-sm px-3 py-3 rounded-md border-blue-gray-200 focus:border-gray-900 @error('password') border-red-500 @enderror" />
+                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('password') border-red-500 @enderror" />
                 @error('password')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror

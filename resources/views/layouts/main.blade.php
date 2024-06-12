@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PT CIG | Back office</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- trix --}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/trix.css') }}">
+    <script src="{{ asset('js/trix.js') }}"></script>
 </head>
 
 <body>
@@ -99,22 +104,26 @@
         function setFormInputErrors(state = 'on', form, inputs, errors = []) {
             if (state == 'on') {
                 form.classList.add('border-red-500');
-                inputs.forEach((input, i) => {
-                    if (Object.keys(errors).includes(input.name)) {
+                inputs.forEach((inputBox, i) => {
+                    const input = inputBox.querySelector(`input[type="text"]`);
+                    if (input && Object.keys(errors).includes(input.name)) {
                         input.classList.add('border-red-500');
-                        const errorMessagesElement = form.querySelector(
-                            `input[name='${input.name}'] + .input-errors`);
-                        if (errorMessagesElement) errorMessagesElement.remove();
-                        input.insertAdjacentHTML("afterend", createErrorMessagesElement(errors));
                     }
+                    const errorMessagesElement = inputBox.nextElementSibling;
+                    if (errorMessagesElement && errorMessagesElement.classList.contains('input-errors'))
+                        errorMessagesElement.remove();
+                    inputBox.insertAdjacentHTML("afterend", createErrorMessagesElement(errors));
                 })
             } else if (state == 'off') {
                 form.classList.remove('border-red-500');
-                inputs.forEach(input => {
-                    input.classList.remove('border-red-500');
-                    const errorMessagesElement = form.querySelector(
-                        `input[name='${input.name}'] + .input-errors`);
-                    if (errorMessagesElement) errorMessagesElement.remove();
+                inputs.forEach(inputBox => {
+                    const input = inputBox.querySelector(`input[type="text"]`);
+                    if (input) {
+                        input.classList.remove('border-red-500');
+                    }
+                    const errorMessagesElement = inputBox.nextElementSibling;
+                    if (errorMessagesElement && errorMessagesElement.classList.contains('input-errors'))
+                        errorMessagesElement.remove();
                 })
             }
         }

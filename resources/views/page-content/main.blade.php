@@ -56,6 +56,12 @@
             const formData = new FormData(e.target);
             const inputs = e.target.querySelectorAll('.input');
             let body = getJsonFromFormData(formData);
+            Object.keys(body).forEach(key => {
+                if (key.includes('table_filters')) {
+                    body[key] = Array.isArray(body[key]) ? body[key] : [body[key]];
+                }
+            });
+            console.log(Array.isArray('awerawer'));
             const response = await fetching('PUT', `/api/page-content/main/${id}`, {
                 body: JSON.stringify(body),
             });
