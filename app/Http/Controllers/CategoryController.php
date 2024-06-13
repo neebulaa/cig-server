@@ -19,7 +19,8 @@ class CategoryController extends Controller
             $categories->where('name', 'LIKE', "%$request->search%");
         }
         return view('categories.index', [
-            "categories" => $categories->paginate(10)->withQueryString()
+            "categories" => $categories->paginate(10)->withQueryString(),
+            "total_items" => $categories->count()
         ]);
     }
 

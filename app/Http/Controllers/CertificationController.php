@@ -19,7 +19,8 @@ class CertificationController extends Controller
             $certifications->where('title', 'LIKE', "%$request->search%")->orWhere('description', 'LIKE', "%$request->search%");
         }
         return view('certifications.index', [
-            "certifications" => $certifications->paginate(10)->withQueryString()
+            "certifications" => $certifications->paginate(10)->withQueryString(),
+            "total_items" => $certifications->count()
         ]);
     }
 

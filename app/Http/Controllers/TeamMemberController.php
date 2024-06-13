@@ -21,7 +21,8 @@ class TeamMemberController extends Controller
                 ->orWhere('bio', 'LIKE', "%$request->search%");
         }
         return view('team_members.index', [
-            "team_members" => $team_members->paginate(10)->withQueryString()
+            "team_members" => $team_members->paginate(10)->withQueryString(),
+            "total_items" => $team_members->count()
         ]);
     }
 

@@ -26,7 +26,8 @@ class RegionController extends Controller
             });
         }
         return view('regions.index', [
-            "regions" => $regions->paginate(10)->withQueryString()
+            "regions" => $regions->paginate(10)->withQueryString(),
+            "total_items" => $regions->count()
         ]);
     }
 

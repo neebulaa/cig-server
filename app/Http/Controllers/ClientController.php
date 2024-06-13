@@ -19,7 +19,8 @@ class ClientController extends Controller
             $clients->where('name', 'LIKE', "%$request->search%");
         }
         return view('clients.index', [
-            "clients" => $clients->paginate(10)->withQueryString()
+            "clients" => $clients->paginate(10)->withQueryString(),
+            "total_items" => $clients->count()
         ]);
     }
 

@@ -14,10 +14,12 @@
         </div>
     @endif
     <hr class="mt-4 mb-4">
-    @include('partials.search', [
-        'page' => 'socials',
-    ])
     @if ($socials->count())
+        @include('partials.search', [
+            'page' => 'socials',
+        ])
+        <p class="mb-2 text-blue-gray-600 text-sm">Socials found: {{ $total_items }}</p>
+
         <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
                 <table class="w-full min-w-[640px] table-auto">

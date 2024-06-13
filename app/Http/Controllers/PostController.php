@@ -24,7 +24,8 @@ class PostController extends Controller
             });
         }
         return view('posts.index', [
-            "posts" => $posts->paginate(10)->withQueryString()
+            "posts" => $posts->paginate(10)->withQueryString(),
+            "total_items" => $posts->count()
         ]);
     }
 

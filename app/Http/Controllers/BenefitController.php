@@ -19,7 +19,8 @@ class BenefitController extends Controller
             $benefits->where('title', 'LIKE', "%$request->search%")->orWhere('description', 'LIKE', "%$request->search%");
         }
         return view('benefits.index', [
-            "benefits" => $benefits->paginate(10)->withQueryString()
+            "benefits" => $benefits->paginate(10)->withQueryString(),
+            "total_items" => $benefits->count()
         ]);
     }
 

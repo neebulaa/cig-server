@@ -26,7 +26,8 @@ class SocialController extends Controller
                 });
         }
         return view('socials.index', [
-            "socials" => $socials->paginate(10)->withQueryString()
+            "socials" => $socials->paginate(10)->withQueryString(),
+            "total_items" => $socials->count()
         ]);
     }
 

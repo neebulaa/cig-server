@@ -19,7 +19,8 @@ class VisionController extends Controller
             $visions->where('title', 'LIKE', "%$request->search%")->orWhere('description', 'LIKE', "%$request->search%");
         }
         return view('visions.index', [
-            "visions" => $visions->paginate(10)->withQueryString()
+            "visions" => $visions->paginate(10)->withQueryString(),
+            "total_items" => $visions->count()
         ]);
     }
 
