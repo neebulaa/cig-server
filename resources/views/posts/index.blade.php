@@ -47,7 +47,7 @@
                                 <td class="py-3 px-5 border-b border-blue-gray-50">
                                     <div class="flex items-center gap-4">
                                         <img src="{{ $post->public_image }}" alt="image-{{ $post->title }}"
-                                            class=" inline-block object-cover object-center rounded w-12 h-10">
+                                            class="inline-block object-cover object-center rounded w-12 h-10">
                                         <p
                                             class="w-[300px] max-w-full block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">
                                             {{ $post->title }}</p>
@@ -55,7 +55,14 @@
                                 </td>
                                 <td class="py-3 px-5 border-b border-blue-gray-50">
                                     <p class="block antialiased font-sans text-sm font-medium text-blue-gray-600">
-                                        {{ $post->category->name }}</p>
+                                        @if ($post->category)
+                                            {{ $post->category->name }}
+                                        @else
+                                            <span class="font-bold text-red-500">
+                                                No Category
+                                            </span>
+                                        @endif
+                                    </p>
                                 </td>
                                 <td class="py-3 px-5 border-b border-blue-gray-50 max-w-[600px]">
                                     <p class="block antialiased font-sans text-sm font-medium text-blue-gray-600">

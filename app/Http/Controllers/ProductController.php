@@ -27,6 +27,7 @@ class ProductController extends Controller
         }
         return view('products.index', [
             "products" => $products->paginate(10)->withQueryString(),
+            "total_items" => $products->count()
         ]);
     }
 

@@ -13,17 +13,19 @@
         <div class="basis-[600px]">
             <h2 class="text-xl text-blue-gray-900 font-bold mt-4 capitalize">{{ $product->name }}</h2>
             <p class="mb-4 text-blue-gray-700">{{ $product->description }}</p>
-            <p class="text-sm text-blue-gray-600">Comodities:</p>
-            <div class="flex flex-wrap gap-1">
-                @foreach ($product->comodities as $comodity)
-                    <span
-                        class="bg-black text-gray-800 text-xs font-medium px-2.5 py-1 rounded dark:bg-gray-700 text-white dark:text-gray-400 border border-gray-500 flex items-center gap-1">
-                        <img class="inline-block object-contain object-center w-5 h-5 rounded-md cursor-pointer"
-                            src="{{ $comodity->public_icon }}" alt="image-{{ $comodity->name }}">
-                        {{ $comodity->name }}
-                    </span>
-                @endforeach
-            </div>
+            @if ($product->comodities->count())
+                <p class="text-sm text-blue-gray-600 mb-1">Comodities:</p>
+                <div class="flex flex-wrap gap-1">
+                    @foreach ($product->comodities as $comodity)
+                        <span
+                            class="bg-black text-gray-800 text-xs font-medium px-2.5 py-1 rounded dark:bg-gray-700 text-white dark:text-gray-400 border border-gray-500 flex items-center gap-1">
+                            <img class="inline-block object-contain object-center w-5 h-5 rounded-md cursor-pointer"
+                                src="{{ $comodity->public_icon }}" alt="image-{{ $comodity->name }}">
+                            {{ $comodity->name }}
+                        </span>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 @endsection

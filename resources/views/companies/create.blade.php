@@ -99,7 +99,7 @@
                     image.src = URL.createObjectURL(imageInput.files[0]);
                     image.classList.remove('hidden');
                     image.classList.add('block');
-                    image.classList.add('bg-gray-100');
+                    image.classList.add('bg-black');
                 }
             });
         });

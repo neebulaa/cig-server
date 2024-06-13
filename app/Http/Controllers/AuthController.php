@@ -15,8 +15,8 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $validatedData = $request->validate([
-            "username" => "required|min:5",
-            "password" => "required|min:5",
+            "username" => "required|min:3",
+            "password" => "required|min:3",
         ]);
 
         if (Auth::attempt($validatedData)) {

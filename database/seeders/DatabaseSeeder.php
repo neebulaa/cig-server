@@ -4,15 +4,21 @@ namespace Database\Seeders;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Client;
+use App\Models\Social;
+use App\Models\Vision;
+use App\Models\Benefit;
 use App\Models\Company;
 use App\Models\Product;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Category;
+use App\Models\Certification;
 use App\Models\Comodity;
 use App\Models\Pinpoint;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\TableFilter;
-use App\Models\ProductComodity;
 use App\Models\RegionComodity;
+use App\Models\ProductComodity;
+use App\Models\TeamMember;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RegionSeeder;
 
@@ -33,7 +39,22 @@ class DatabaseSeeder extends Seeder
         User::create([
             "name" => "Owner",
             "username" => "owner",
-            "password" => "owner"
+            "password" => "owner",
+            "role" => "owner"
+        ]);
+
+        User::create([
+            "name" => "Editor 1",
+            "username" => "editor1",
+            "password" => "editor1",
+            "role" => "editor"
+        ]);
+
+        User::create([
+            "name" => "Editor 2",
+            "username" => "editor2",
+            "password" => "editor2",
+            "role" => "editor"
         ]);
 
         // company
@@ -43,7 +64,7 @@ class DatabaseSeeder extends Seeder
             "about" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore temporibus impedit voluptatem atque officia laboriosam eos quasi nesciunt dignissimos corrupti!",
             "address" => "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             "phone" => "+62-123-1234-123",
-            "logo" => null
+            "logo" => 'companies/cig.png'
         ]);
 
         // post categories
@@ -73,6 +94,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Post::factory(15)->create();
+        Client::factory(15)->create();
 
         // page content
         $this->call([
@@ -100,32 +122,18 @@ class DatabaseSeeder extends Seeder
 
         // comodities
         Comodity::factory(10)->create();
+        Social::factory(4)->create();
 
         // product comodities
-        ProductComodity::create([
-            "product_id" => 1,
-            "comodity_id" => 1,
-        ]);
-
-        ProductComodity::create([
-            "product_id" => 2,
-            "comodity_id" => 1,
-        ]);
-
-        ProductComodity::create([
-            "product_id" => 1,
-            "comodity_id" => 2,
-        ]);
-
-        ProductComodity::create([
-            "product_id" => 6,
-            "comodity_id" => 3,
-        ]);
-
-        ProductComodity::create([
-            "product_id" => 8,
-            "comodity_id" => 2,
-        ]);
+        for ($i = 1; $i <= 10; $i++) {
+            $number_of_comodities = random_int(1, 5);
+            for ($j = 0; $j < $number_of_comodities; $j++) {
+                ProductComodity::create([
+                    "product_id" => $i,
+                    "comodity_id" => random_int(1, 10)
+                ]);
+            }
+        }
 
         // region comodities
         for ($i = 1; $i <= 38; $i++) {
@@ -146,5 +154,10 @@ class DatabaseSeeder extends Seeder
                 "pos_y" => 20,
             ]);
         }
+
+        TeamMember::factory(10)->create();
+        Vision::factory(3)->create();
+        Benefit::factory(3)->create();
+        Certification::factory(6)->create();
     }
 }

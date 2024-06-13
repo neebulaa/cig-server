@@ -39,7 +39,8 @@
         </div>
 
         <div class="input-box mt-4">
-            <label class="block mb-2 text-sm font-sans font-medium text-gray-900 dark:text-white" for="logo">Upload Logo</label>
+            <label class="block mb-2 text-sm font-sans font-medium text-gray-900 dark:text-white" for="logo">Upload
+                Logo</label>
             <img alt="image-preview"
                 class="image-preview w-[80px] h-[80px] p-1 max-w-full rounded-md object-contain mt-4 mb-4 hidden">
             <input
@@ -67,7 +68,7 @@
                     image.src = URL.createObjectURL(imageInput.files[0]);
                     image.classList.remove('hidden');
                     image.classList.add('block');
-                    image.classList.add('bg-gray-100');
+                    image.classList.add('bg-black');
                 }
             });
         });

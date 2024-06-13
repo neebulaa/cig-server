@@ -48,7 +48,7 @@
                 <option disabled>Choose a category</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" class="capitalize"
-                        {{ old('category_id', $post->category->id) == $category->id ? 'selected' : '' }}>
+                        {{ old('category_id', $post->category ? $post->category->id : 0) == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}</option>
                 @endforeach
             </select>

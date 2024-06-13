@@ -19,7 +19,11 @@ class RegionController extends Controller
 
         $regions = Region::latest();
         if ($request->search) {
-            $regions->where('title', 'LIKE', "%$request->search%")->orWhere('type', 'LIKE', "%$request->search%")->orWhere('description', 'LIKE', "%$request->search%");
+            $regions->where('name', 'LIKE', "%$request->search%")->orWhere('type', 'LIKE', "%$request->search%")->orWhere('description', 'LIKE', "%$request->search%")->orWhere(function ($query) use ($request) {
+                $query->whereHas('comodities', function ($q) use ($request) {
+                    return $q->where('name', 'LIKE', "%$request->search%");
+                });
+            });
         }
         return view('regions.index', [
             "regions" => $regions->paginate(10)->withQueryString()

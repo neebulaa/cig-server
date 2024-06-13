@@ -19,7 +19,8 @@ class ComodityController extends Controller
             $comodities->where('name', 'LIKE', "%$request->search%");
         }
         return view('comodities.index', [
-            "comodities" => $comodities->paginate(10)->withQueryString()
+            "comodities" => $comodities->paginate(10)->withQueryString(),
+            "total_items" => $comodities->count()
         ]);
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('page_content_id')->constrained('page_contents')->onDelete('cascade');
             $table->string('name');
             $table->text('value');
-            $table->enum('type', ['text', 'textarea', 'table_filters'])->default('text');
+            $table->enum('type', ['text', 'link', 'textarea', 'table_filters'])->default('text');
             $table->timestamps();
         });
     }

@@ -12,7 +12,15 @@
             alt="image-{{ $post->title }}" class="">
         <div class="max-w-[800px]">
             <h2 class="text-xl text-blue-gray-900 font-bold capitalize mt-4">{{ $post->title }}</h2>
-            <p class="capitalize mt-1 mb-4 font-semibold text-blue-gray-500 text-sm">category: {{ $post->category->name }}</p>
+            @if ($post->category)
+                <p class="capitalize mt-1 mb-4 font-semibold text-blue-gray-500 text-sm">category:
+                    {{ $post->category->name }}
+                </p>
+            @else
+                <p class="capitalize mt-1 mb-4 font-semibold text-red-500 text-sm">
+                    No Category
+                </p>
+            @endif
             <p class="mb-4 text-blue-gray-700">{{ $post->description }}</p>
         </div>
     </div>

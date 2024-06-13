@@ -20,8 +20,7 @@
         }
 
         .pinpoint-draggable {
-            filter: drop-shadow(0 0 3px white);
-            z-index: 10;
+            z-index: 1;
             position: absolute;
             width: 30px;
             top: calc(var(--top-percent) * 1%);
@@ -29,6 +28,7 @@
         }
 
         .pinpoint-draggable>img {
+            filter: drop-shadow(0 0 3px white);
             display: block;
             width: 100%;
         }
@@ -45,6 +45,36 @@
             opacity: 0;
             height: 12px;
             animation: fadeInAndOut calc(var(--total) * 2s) calc(var(--order) * 2s) linear infinite;
+        }
+
+        .pinpoint-draggable .identifier {
+            text-align: center;
+            left: 50%;
+            translate: -50%;
+            top: 105%;
+            width: 150px;
+            position: absolute;
+            padding: .5rem;
+            border: 1px solid gray;
+            background: #111;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .pinpoint-draggable:has(*:not(.identifier):not(.identifier > *):hover) .identifier {
+            display: block;
+        }
+
+        .pinpoint-draggable .identifier::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            background: var(--color);
+            clip-path: polygon(50% 0, 50% 0, 100% 100%, 0 100%);
+            left: 50%;
+            translate: -50%;
         }
 
         @keyframes fadeInAndOut {
@@ -71,91 +101,113 @@
         </div>
     @endif
     <hr class="mt-4 mb-4">
-    @if ($pinpoints->count())
-        <div class="bg-[#111] rounded-md overflow-hidden">
-            <div id="map" class="rounded overflow-hidden">
-                {{-- <img src="{{ asset('images/map-pin.png') }}" alt="pin map" id="pinpoint-draggable" draggable="false"> --}}
-                @foreach ($pinpoints as $pinpoint)
-                    @if ($pinpoint->region->type === 'province')
-                        <div id="pinpoint-draggable-{{ $pinpoint->region->slug }}"
-                            class="pinpoint-draggable {{ $pinpoint->is_active ? 'opacity-100' : 'opacity-0' }}">
-                            <img src="{{ asset('images/province-pin.png') }}" alt="pin map" draggable="false">
+    <div class="bg-[#111] rounded-md overflow-hidden">
+        <div id="map" class="rounded overflow-hidden">
+            @foreach ($pinpoints as $pinpoint)
+                @if ($pinpoint->region->type === 'province')
+                    <div id="pinpoint-draggable-{{ $pinpoint->region->slug }}"
+                        class="pinpoint-draggable {{ $pinpoint->is_active ? 'opacity-100 !z-10' : 'opacity-0' }}">
+                        <img src="{{ asset('images/province-pin.png') }}" alt="pin map" draggable="false">
+                        @if ($pinpoint->region->comodities->count())
+                            <div class="comodities absolute top-1 left-1/2 -translate-x-1/2"
+                                style="--total: {{ $pinpoint->region->comodities->count() }}">
+                                @foreach ($pinpoint->region->comodities as $index => $comodity)
+                                    <img src="{{ $comodity->public_icon }}" alt="image-{{ $comodity->name }}"
+                                        style="--order: {{ $index }}">
+                                @endforeach
+                            </div>
+                        @endif
+
+                        <div class="identifier text-xs" style="--color: #31c48d;">
+                            <p class="capitalize text-green-400">
+                                {{ $pinpoint->region->type }}</p>
+                            <p class="text-white font-semibold">{{ $pinpoint->region->name }}</p>
                             @if ($pinpoint->region->comodities->count())
-                                <div class="comodities absolute top-1 left-1/2 -translate-x-1/2"
-                                    style="--total: {{ $pinpoint->region->comodities->count() }}">
+                                <p class="mt-4 text-white capitalize mb-1">
+                                    Comodities:
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-center">
                                     @foreach ($pinpoint->region->comodities as $index => $comodity)
                                         <img src="{{ $comodity->public_icon }}" alt="image-{{ $comodity->name }}"
-                                            style="--order: {{ $index }}">
+                                            class="w-4 h-4">
                                     @endforeach
                                 </div>
                             @endif
                         </div>
-                    @endif
+                    </div>
+                @endif
 
-                    @if ($pinpoint->region->type === 'harbor')
-                        <div id="pinpoint-draggable-{{ $pinpoint->region->slug }}"
-                            class="pinpoint-draggable {{ $pinpoint->is_active ? 'opacity-100' : 'opacity-0' }}">
-                            <img src="{{ asset('images/harbor-pin.png') }}" alt="pin map" draggable="false">
+                @if ($pinpoint->region->type === 'harbor')
+                    <div id="pinpoint-draggable-{{ $pinpoint->region->slug }}"
+                        class="pinpoint-draggable {{ $pinpoint->is_active ? 'opacity-100 !z-10' : 'opacity-0' }}">
+                        <img src="{{ asset('images/harbor-pin.png') }}" alt="pin map" draggable="false">
+
+                        <div class="identifier text-xs" style="--color: #111;">
+                            <p class="capitalize text-red-400">
+                                {{ $pinpoint->region->type }}</p>
+                            <p class="text-white font-semibold">{{ $pinpoint->region->name }}</p>
                         </div>
-                    @endif
-                @endforeach
-                <img src="{{ asset('images/map-white.png') }}" alt="white map" id="map-img" />
-            </div>
+                    </div>
+                @endif
+            @endforeach
+            <img src="{{ asset('images/map-white.png') }}" alt="white map" id="map-img" />
         </div>
+    </div>
+    <script>
+        let pinpointMap = document.querySelector("#map");
+        let pinpoinMapRect = pinpointMap.getBoundingClientRect();
+    </script>
+    @foreach ($pinpoints as $pinpoint)
+        <style>
+            #pinpoint-draggable-{{ $pinpoint->region->slug }} {
+                --top-px: 0;
+                --left-px: 0;
+                --top-percent: 0;
+                --left-percent: 0;
+            }
+        </style>
         <script>
-            let pinpointMap = document.querySelector("#map");
-            let pinpoinMapRect = pinpointMap.getBoundingClientRect();
+            window.addEventListener('load', function() {
+                let posXCoordinate{{ $pinpoint->id }} = parseFloat({{ $pinpoint->pos_x }});
+                let posYCoordinate{{ $pinpoint->id }} = parseFloat({{ $pinpoint->pos_y }});
+                let pinpointDraggableImage{{ $pinpoint->id }} = document.querySelector(
+                    '#{{ 'pinpoint-draggable-' . $pinpoint->region->slug }}');
+                let pinpointDraggableImageRect{{ $pinpoint->id }} = pinpointDraggableImage{{ $pinpoint->id }}
+                    .getBoundingClientRect();
+
+                (pinpointDraggableImage{{ $pinpoint->id }})
+                .style.setProperty('--top-percent', posYCoordinate{{ $pinpoint->id }} -
+                    (pinpointDraggableImageRect{{ $pinpoint->id }}).height /
+                    pinpoinMapRect.height * 100);
+
+                (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--top-px', (
+                    posYCoordinate{{ $pinpoint->id }} -
+                    (pinpointDraggableImageRect{{ $pinpoint->id }}).height /
+                    pinpoinMapRect.height * 100) / 100 * pinpoinMapRect.height);
+
+                (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--left-percent',
+                    posXCoordinate{{ $pinpoint->id }} -
+                    ((pinpointDraggableImageRect{{ $pinpoint->id }}).width / 2) /
+                    pinpoinMapRect.width * 100);
+
+                (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--left-px', (
+                    posXCoordinate{{ $pinpoint->id }} - (
+                        (pinpointDraggableImageRect{{ $pinpoint->id }}).width / 2) /
+                    pinpoinMapRect.width * 100) / 100 * pinpoinMapRect.width);
+            });
         </script>
-        @foreach ($pinpoints as $pinpoint)
-            <style>
-                #pinpoint-draggable-{{ $pinpoint->region->slug }} {
-                    --top-px: 0;
-                    --left-px: 0;
-                    --top-percent: 0;
-                    --left-percent: 0;
-                }
-            </style>
-            <script>
-                window.addEventListener('load', function() {
-                    let posXCoordinate{{ $pinpoint->id }} = parseFloat({{ $pinpoint->pos_x }});
-                    let posYCoordinate{{ $pinpoint->id }} = parseFloat({{ $pinpoint->pos_y }});
-                    let pinpointDraggableImage{{ $pinpoint->id }} = document.querySelector(
-                        '#{{ 'pinpoint-draggable-' . $pinpoint->region->slug }}');
-                    let pinpointDraggableImageRect{{ $pinpoint->id }} = pinpointDraggableImage{{ $pinpoint->id }}
-                        .getBoundingClientRect();
+    @endforeach
 
-                    (pinpointDraggableImage{{ $pinpoint->id }})
-                    .style.setProperty('--top-percent', posYCoordinate{{ $pinpoint->id }} -
-                        (pinpointDraggableImageRect{{ $pinpoint->id }}).height /
-                        pinpoinMapRect.height * 100);
+    <h2 class="mt-5 text-lg font-bold mb-2">Pinpoints</h2>
 
-                    (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--top-px', (
-                        posYCoordinate{{ $pinpoint->id }} -
-                        (pinpointDraggableImageRect{{ $pinpoint->id }}).height /
-                        pinpoinMapRect.height * 100) / 100 * pinpoinMapRect.height);
-
-                    (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--left-percent',
-                        posXCoordinate{{ $pinpoint->id }} -
-                        ((pinpointDraggableImageRect{{ $pinpoint->id }}).width / 2) /
-                        pinpoinMapRect.width * 100);
-
-                    (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--left-px', (
-                        posXCoordinate{{ $pinpoint->id }} - (
-                            (pinpointDraggableImageRect{{ $pinpoint->id }}).width / 2) /
-                        pinpoinMapRect.width * 100) / 100 * pinpoinMapRect.width);
-                });
-            </script>
-        @endforeach
-
-        <h2 class="mt-5 text-lg font-bold mb-2">Pinpoints</h2>
-
-        @include('partials.search', [
-            'page' => 'pinpoints',
-        ])
+    @include('partials.search', [
+        'page' => 'pinpoints',
+    ])
+    @if ($filtered_pinpoints->count())
         <form onsubmit="updatePinpoints(event)" class="mt-4">
             <div class="max-h-[500px] overflow-y-auto">
                 <div class="grid gap-6 p-1" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))">
-                    @foreach ($pinpoints as $pinpoint)
+                    @foreach ($filtered_pinpoints as $pinpoint)
                         <div class="flex">
                             <div class="flex items-center h-5">
                                 <input id="pinpoint-{{ $pinpoint->region->slug }}" aria-describedby="helper-checkbox-text"
@@ -210,10 +262,12 @@
                 pinpoints.forEach(pinpoint => {
                     pinpoint.classList.add('opacity-0');
                     pinpoint.classList.remove('opacity-100');
+                    pinpoint.classList.remove('!z-10');
                 });
                 slugs.forEach(slug => {
                     const pinpoint = document.querySelector(`#pinpoint-draggable-${ slug }`);
                     pinpoint.classList.add('opacity-100');
+                    pinpoint.classList.add('!z-10');
                     pinpoint.classList.remove('opacity-0');
                 });
                 Toast.open('success', response.data.message);

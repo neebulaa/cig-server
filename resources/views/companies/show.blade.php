@@ -8,10 +8,10 @@
     <hr class="mt-4 mb-4">
 
     <div class="flex flex-wrap gap-4">
-        <img class="object-contain w-full bg-black rounded-lg max-w-72 max-h-72 aspect-square" src="{{ $company->public_logo }}"
-            alt="image-{{ $company->name }}" class="">
+        <img class="object-contain w-full bg-black rounded-lg max-w-24 max-h-24 aspect-square"
+            src="{{ $company->public_logo }}" alt="image-{{ $company->name }}" class="">
         <div class="basis-[600px]">
-            <h2 class="text-xl text-blue-gray-900 font-bold mt-4 capitalize">{{ $company->name }}</h2>
+            <h2 class="text-xl text-blue-gray-900 font-bold capitalize">{{ $company->name }}</h2>
             <p class="mb-4 text-blue-gray-700">{{ $company->about }}</p>
             <p class="text-sm font-semibold text-blue-gray-800 mb-1">Company Information:</p>
             <ul class="text-sm text-blue-gray-600">

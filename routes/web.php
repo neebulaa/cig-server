@@ -1,5 +1,13 @@
 <?php
 
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Client;
+use App\Models\Region;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Pinpoint;
+use App\Models\Certification;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
@@ -12,22 +20,39 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ComodityController;
+use App\Http\Controllers\PinpointController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\PageContentController;
 use App\Http\Controllers\CertificationController;
-use App\Http\Controllers\PinpointController;
+use App\Http\Controllers\EditorController;
 
 Route::group(['middleware' => "auth"], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-
     Route::get('/', function () {
-        return view('home');
+        return view('home', [
+            "pinpoints" => Pinpoint::latest()->get(),
+            "products" => Product::with('comodities')->latest()->get(),
+            "posts" => Post::with('category')->latest()->get(),
+            "clients" => Client::latest()->get(),
+            "regions" => Region::latest()->get(),
+            "certifications" => Certification::latest()->get(),
+            "categories" => Category::latest()->get(),
+        ]);
     });
 
-    Route::get('/users', function () {
-        return view('users.index');
+    // editors
+    Route::middleware('owner')->group(function () {
+        Route::get('/editors', [EditorController::class, 'index']);
+        Route::post('/editors', [EditorController::class, 'store']);
+        Route::put('/editors/{user:username}', [EditorController::class, 'update']);
+        Route::delete('/editors/{user:username}', [EditorController::class, 'destroy']);
+        Route::get('/editors/create', [EditorController::class, 'create']);
+        Route::get('/editors/edit/{user:username}', [EditorController::class, 'edit']);
+        Route::get('/editors/change-password/{user:username}', [EditorController::class, 'change_password']);
+        Route::put('/editors/change-password/{user:username}', [EditorController::class, 'change_password_update']);
     });
 
+    // page content
     Route::get('/page-content/{page}', [PageContentController::class, 'index']);
 
     // product

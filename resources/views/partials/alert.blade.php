@@ -5,7 +5,7 @@
     ];
 @endphp
 <div role="alert"
-    class="alert max-w-md relative mt-4 block w-full text-base font-regular px-4 py-4 rounded-lg {{ $alertClassTypes[$type] }} text-white flex"
+    class="alert {{ $width ?? 'max-w-md' }} relative mt-4 block w-full text-base font-regular px-4 py-4 rounded-lg {{ $alertClassTypes[$type] }} text-white flex"
     style="opacity: 1;">
     <div class="shrink-0">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"

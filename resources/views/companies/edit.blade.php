@@ -75,7 +75,7 @@
             <label class="block mb-2 text-sm font-sans font-medium text-gray-900 dark:text-white" for="logo">Upload
                 Logo</label>
             <img alt="image-preview" src="{{ $company->public_logo }}"
-                class="bg-gray-100 image-preview w-[80px] h-[80px] max-w-full rounded-md object-contain mt-4 mb-4">
+                class="bg-black image-preview w-[80px] h-[80px] max-w-full rounded-md object-contain mt-4 mb-4">
             <input
                 class="image-preview-input block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @error('logo') border-red-500 @enderror"
                 aria-describedby="file_input_help" id="logo" name="logo" type="file" accept="image/*">
@@ -101,7 +101,7 @@
                     image.src = URL.createObjectURL(imageInput.files[0]);
                     image.classList.remove('hidden');
                     image.classList.add('block');
-                    image.classList.add('bg-gray-100');
+                    image.classList.add('bg-black');
                 }
             });
         });

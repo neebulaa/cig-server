@@ -28,12 +28,18 @@
                                                 class="block mb-2 text-sm font-sans font-medium text-gray-900 dark:text-white">
                                                 {{ $value['name'] }}:</label>
 
-                                            @if ($value['type'] == 'text')
+                                            @if ($value['type'] == 'text' || $value['type'] == 'link')
                                                 <input placeholder="Type something..." type="text"
                                                     id="{{ $content['page'] }}-{{ $content['key'] }}-{{ $value['type'] }}"
                                                     name="{{ $value['type'] }}_{{ $index + 1 }}"
                                                     class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     value="{{ $value['value'] }}" />
+                                                @if ($value['type'] == 'link')
+                                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                                                        id="file_input_help">To link to page use <span
+                                                            class="font-bold">/page-name</span> but if you want to link to
+                                                        section use <span class="font-bold">#section-name</span></p>
+                                                @endif
                                             @elseif ($value['type'] == 'table_filters')
                                                 @foreach ($content['filters'] as $indexFilter => $filter)
                                                     <div class="flex items-center gap-2">
@@ -47,6 +53,8 @@
                                                             class="">{{ $filter->name }}</label>
                                                     </div>
                                                 @endforeach
+                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                                                    id="file_input_help">Min 1 item</p>
                                             @elseif ($value['type'] == 'textarea')
                                                 <textarea cols="30" rows="10" name="{{ $value['type'] }}_{{ $index + 1 }}"
                                                     id="{{ $content['page'] }}-{{ $content['key'] }}-{{ $value['type'] }}"

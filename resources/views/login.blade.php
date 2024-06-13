@@ -4,6 +4,7 @@
     @if (session()->has('login_error'))
         @include('partials.alert', [
             'type' => 'danger',
+            'width' => 'w-full',
             'message' => session('login_error'),
         ])
     @endif

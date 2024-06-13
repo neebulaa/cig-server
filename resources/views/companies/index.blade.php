@@ -51,7 +51,7 @@
                                 <td class="py-3 px-5 border-b border-blue-gray-50">
                                     <div class="flex items-center gap-4">
                                         <img src="{{ $company->public_logo }}" alt="image-{{ $company->name }}"
-                                            class="bg-gray-100 inline-block relative object-contain object-center rounded p-1 w-10 h-10 shrink-0">
+                                            class="bg-black inline-block relative object-contain object-center rounded p-1 w-10 h-10 shrink-0">
                                         <p
                                             class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold min-w-[200px]">
                                             {{ $company->name }}</p>

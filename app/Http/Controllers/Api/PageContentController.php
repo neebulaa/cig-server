@@ -9,6 +9,49 @@ use Illuminate\Support\Facades\Validator;
 
 class PageContentController extends Controller
 {
+    public function index()
+    {
+        $page_contents = PageContent::all();
+
+        $formatted_page_contents = $page_contents->reduce(function ($result, $page_content) {
+            // page
+            if (!isset($result[$page_content->page])) {
+                $result[$page_content->page] = [];
+            }
+
+            // section
+            [$section_name, $section_part] = explode('-', $page_content->key);
+            if (!isset($result[$page_content->page][$section_name])) {
+                $result[$page_content->page][$section_name] = [];
+            }
+
+            $page_content_values = [];
+            foreach ($page_content->values as $value) {
+                if (isset($page_content_values[$value->type])) {
+                    if (is_array($page_content_values[$value->type])) {
+                        $page_content_values[$value->type][] = $value->value;
+                    } else {
+                        $page_content_values[$value->type] = [$value->value];
+                    }
+                } else {
+                    $page_content_values[$value->type] = $value->value;
+                }
+            }
+
+            if (count(array_keys($page_content_values)) == 1) {
+                $page_content_values = array_values($page_content_values)[0];
+            }
+
+            $result[$page_content->page][$section_name][$section_part] = $page_content_values;
+            return $result;
+        }, []);
+
+        return response([
+            "message" => "Get page content success!",
+            "page_contents" => $formatted_page_contents
+        ]);
+    }
+
     public function main_update(Request $request, PageContent $page_content)
     {
 

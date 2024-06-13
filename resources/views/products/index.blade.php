@@ -14,10 +14,13 @@
         </div>
     @endif
     <hr class="mt-4 mb-4">
-    @include('partials.search', [
-        'page' => 'products',
-    ])
     @if ($products->count())
+        @include('partials.search', [
+            'page' => 'products',
+        ])
+
+        <p class="mb-2 text-blue-gray-600 text-sm">Products found: {{ $total_items }}</p>
+
         <div class="flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
                 <table class="w-full min-w-[640px] table-auto">
@@ -51,19 +54,26 @@
                                         <img src="{{ $product->public_image }}" alt="image-{{ $product->name }}"
                                             class="inline-block object-cover object-center rounded w-12 h-12">
                                         <p
-                                            class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">
+                                            class="w-[200px] max-w-full block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">
                                             {{ $product->name }}</p>
                                     </div>
                                 </td>
                                 <td class="py-3 px-5 border-b border-blue-gray-50">
-                                    @foreach ($product->comodities as $comodity)
-                                        <div class="flex gap-1 items-center">
-                                            <img src="{{ $comodity->publicIcon }}" alt="image-{{ $comodity->name }}"
-                                                class="inline-block bg-black object-contain object-center p-0.5 w-7 h-7 rounded-md cursor-pointer border-2 border-white">
-                                            <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">
-                                                {{ $comodity->name }}</p>
-                                        </div>
-                                    @endforeach
+                                    @if ($product->comodities->count())
+                                        @foreach ($product->comodities as $comodity)
+                                            <div class="flex gap-1 items-center">
+                                                <img src="{{ $comodity->publicIcon }}" alt="image-{{ $comodity->name }}"
+                                                    class="inline-block bg-black object-contain object-center p-0.5 w-7 h-7 rounded-md border-2 border-white">
+                                                <p
+                                                    class="block antialiased font-sans text-xs font-medium text-blue-gray-600">
+                                                    {{ $comodity->name }}</p>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <span class="font-bold text-red-500 text-sm">
+                                            No Category
+                                        </span>
+                                    @endif
                                 </td>
                                 <td class="py-3 px-5 border-b border-blue-gray-50 max-w-[600px]">
                                     <p class="block antialiased font-sans text-sm font-medium text-blue-gray-600">

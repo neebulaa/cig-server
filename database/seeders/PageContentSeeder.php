@@ -56,7 +56,7 @@ class PageContentSeeder extends Seeder
 
         PageContentValue::create([
             "page_content_id" => 3,
-            "type" => "text",
+            "type" => "link",
             "name" => "Link",
             "value" => "#products"
         ]);
@@ -76,7 +76,7 @@ class PageContentSeeder extends Seeder
 
         PageContentValue::create([
             "page_content_id" => 4,
-            "type" => "text",
+            "type" => "link",
             "name" => "Link",
             "value" => "#join-us"
         ]);
@@ -259,7 +259,7 @@ class PageContentSeeder extends Seeder
 
         PageContentValue::create([
             "page_content_id" => 15,
-            "type" => "text",
+            "type" => "link",
             "name" => "Link",
             "value" => "/products",
         ]);
@@ -388,7 +388,7 @@ class PageContentSeeder extends Seeder
 
         PageContentValue::create([
             "page_content_id" => 24,
-            "type" => "text",
+            "type" => "link",
             "name" => "Link",
             "value" => "/posts",
         ]);
@@ -475,7 +475,7 @@ class PageContentSeeder extends Seeder
         ]);
 
         PageContent::create([
-            "key" => "filters",
+            "key" => "catalog-filters",
             "page" => "products",
             "title" => "Products page filter",
         ]);

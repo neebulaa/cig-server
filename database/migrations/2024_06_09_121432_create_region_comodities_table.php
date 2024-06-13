@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('region_comodities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('region_id')->constrained('regions')->onDelete('cascade');
-            $table->foreignId('comodity_id')->constrained('comodities');
+            $table->foreignId('comodity_id')->constrained('comodities')->onDelete('cascade');
             $table->timestamps();
         });
     }
