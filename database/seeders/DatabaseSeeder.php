@@ -12,15 +12,16 @@ use App\Models\Company;
 use App\Models\Product;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Category;
-use App\Models\Certification;
 use App\Models\Comodity;
 use App\Models\Pinpoint;
+use App\Models\TeamMember;
 use App\Models\TableFilter;
+use App\Models\Certification;
 use App\Models\RegionComodity;
 use App\Models\ProductComodity;
-use App\Models\TeamMember;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RegionSeeder;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,6 +36,26 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // delete all folders
+        $folders = [
+            "benefits",
+            "certifications",
+            "clients",
+            "comodities",
+            "posts",
+            "products",
+            "companies",
+            "team_members",
+            "visions",
+        ];
+        
+        foreach ($folders as $folder) {
+            if (File::exists(public_path("images/$folder"))) {
+                File::deleteDirectory(public_path("images/$folder"));
+            }
+        }
+
 
         User::create([
             "name" => "Owner",
@@ -64,7 +85,7 @@ class DatabaseSeeder extends Seeder
             "about" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore temporibus impedit voluptatem atque officia laboriosam eos quasi nesciunt dignissimos corrupti!",
             "address" => "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             "phone" => "+62-123-1234-123",
-            "logo" => 'companies/cig.png'
+            "logo" => 'cig.png'
         ]);
 
         // post categories

@@ -55,14 +55,26 @@
         </div>
 
         <div class="input-box mt-4">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            {{-- <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 for="description">Description</label>
 
             <textarea cols="30" rows="10" name="description" id="description"
                 class="resize-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('description') border-red-500 @enderror">{{ old('description', '') }}</textarea>
             @error('description')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
+            @enderror --}}
+
+            <div class="input-box mt-4">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    for="description">Description</label>
+
+                <input id="description" type="hidden" name="description" value="{{ old('description', '') }}">
+                <trix-editor input="description"
+                    class="resize-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('description') border-red-500 @enderror"></trix-editor>
+                @error('description')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
         </div>
 
         <div class="input-box mt-4">

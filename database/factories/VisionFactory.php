@@ -21,13 +21,13 @@ class VisionFactory extends Factory
         $image = $images[random_int(0, count($images) - 1)];
         $randomFilename = uniqid() . '.' . $image->getExtension();
 
-        $targetDirectory = 'images/products/';
+        $targetDirectory = 'images/visions/';
         if (!File::exists(public_path($targetDirectory))) {
             File::makeDirectory(public_path($targetDirectory), 0777, true, true);
         }
 
         File::copy($image->getPathname(), public_path($targetDirectory . $randomFilename));
-        $uploadedImagePath = 'products/' . $randomFilename;
+        $uploadedImagePath = 'visions/' . $randomFilename;
         return [
             "title" => fake()->sentence(random_int(2, 3)),
             "slug" => fake()->slug(),
