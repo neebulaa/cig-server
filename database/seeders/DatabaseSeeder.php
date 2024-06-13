@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
         // company
         Company::create([
             "name" => "PT Crescentia Indo Global (CIG)",
-            "slug" => "pt-crescentia-indo-global-(cig)",
+            "slug" => "pt-crescentia-indo-global-cig",
             "about" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore temporibus impedit voluptatem atque officia laboriosam eos quasi nesciunt dignissimos corrupti!",
             "address" => "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             "phone" => "+62-123-1234-123",

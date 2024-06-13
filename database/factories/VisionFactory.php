@@ -31,7 +31,7 @@ class VisionFactory extends Factory
         return [
             "title" => fake()->sentence(random_int(2, 3)),
             "slug" => fake()->slug(),
-            "description" => fake()->sentences(random_int(1, 2), true),
+            "description" => fake()->sentences(random_int(3, 5), true),
             "image" => $uploadedImagePath
         ];
     }

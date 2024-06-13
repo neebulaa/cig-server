@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\PageContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,7 +35,14 @@ class PageContentController extends Controller
                         $page_content_values[$value->type] = [$value->value];
                     }
                 } else {
-                    $page_content_values[$value->type] = $value->value;
+                    if ($value->type == 'table_filters') {
+                        $table_filters = explode(',', $value->value);
+                        foreach ($table_filters as $table) {
+                            $page_content_values[$value->type][$table] = DB::table($table)->select()->get();
+                        }
+                    } else {
+                        $page_content_values[$value->type] = $value->value;
+                    }
                 }
             }
 

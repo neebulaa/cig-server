@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class PinpointController extends Controller
 {
+    public function index()
+    {
+        $pinpoints = Pinpoint::with('region', 'region.comodities')->latest()->get();
+        return response([
+            "message" => "Get all pinpoints success",
+            "pinpoints" => $pinpoints
+        ]);
+    }
+
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
