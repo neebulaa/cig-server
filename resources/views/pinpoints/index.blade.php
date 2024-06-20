@@ -78,7 +78,6 @@
         }
 
         @keyframes fadeInAndOut {
-
             0%,
             20%,
             100% {

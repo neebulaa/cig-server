@@ -11,7 +11,7 @@ class PinpointController extends Controller
 {
     public function index()
     {
-        $pinpoints = Pinpoint::with('region', 'region.comodities')->latest()->get();
+        $pinpoints = Pinpoint::where('is_active', true)->with('region', 'region.comodities')->latest()->get();
         return response([
             "message" => "Get all pinpoints success",
             "pinpoints" => $pinpoints

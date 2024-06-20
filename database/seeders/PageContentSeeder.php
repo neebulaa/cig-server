@@ -567,5 +567,32 @@ class PageContentSeeder extends Seeder
             "name" => "Text",
             "value" => "What we have done?",
         ]);
+
+        // pinpoints content
+        PageContent::create([
+            "key" => "pinpoints-title",
+            "page" => "main",
+            "title" => "Pin points content title",
+        ]);
+
+        PageContentValue::create([
+            "page_content_id" => 38,
+            "type" => "text",
+            "name" => "Text",
+            "value" => "Pinpoints",
+        ]);
+
+        PageContent::create([
+            "key" => "pinpoints-tagline",
+            "page" => "main",
+            "title" => "Pin points content tagline (after title)",
+        ]);
+
+        PageContentValue::create([
+            "page_content_id" => 39,
+            "type" => "text",
+            "name" => "Text",
+            "value" => "Our region with its speciality",
+        ]);
     }
 }

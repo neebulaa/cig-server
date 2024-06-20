@@ -26,4 +26,6 @@ class Comodity extends Model
             ]
         ];
     }
+
+    protected $appends = ['public_icon'];
 }

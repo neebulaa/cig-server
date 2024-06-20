@@ -19,7 +19,7 @@ Route::put('/page-content/main/{page_content}', [PageContentController::class, '
 Route::put('/pinpoints', [PinpointController::class, 'update']);
 
 
-Route::get('/page-contents', [PageContentController::class, 'index']);
+Route::get('/page_contents', [PageContentController::class, 'index']);
 Route::get('/pinpoints', [PinpointController::class, 'index']);
 Route::get('/visions', [VisionController::class, 'index']);
 Route::get('/benefits', [BenefitController::class, 'index']);

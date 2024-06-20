@@ -32,7 +32,7 @@ class PageContentController extends Controller
                     if (is_array($page_content_values[$value->type])) {
                         $page_content_values[$value->type][] = $value->value;
                     } else {
-                        $page_content_values[$value->type] = [$value->value];
+                        $page_content_values[$value->type] = [$page_content_values[$value->type], $value->value];
                     }
                 } else {
                     if ($value->type == 'table_filters') {
