@@ -31,6 +31,11 @@ class VisionController extends Controller
 
     public function store(Request $request)
     {
+        $visions_count = Vision::all()->count();
+        if ($visions_count == 3) {
+            return back()->with('error', 'Maximum visions exceeded!');
+        }
+
         $validated_data = $request->validate([
             "title" => "required|min:3",
             "slug" => "required|min:3|unique:visions,slug",
@@ -102,19 +107,19 @@ class VisionController extends Controller
         return redirect('/visions')->with('success', "Successfully update vision");
     }
 
-    public function destroy(Vision $vision)
-    {
-        $success = Vision::destroy($vision->id);
+    // public function destroy(Vision $vision)
+    // {
+    //     $success = Vision::destroy($vision->id);
 
-        $filePath = public_path("images/$vision->image");
-        if (File::exists($filePath)) {
-            File::delete($filePath);
-        }
-        if (!$success) {
-            return back()->with('error', 'Something went wrong!');
-        }
-        return redirect('/visions')->with('success', "Successfully delete a vision");
-    }
+    //     $filePath = public_path("images/$vision->image");
+    //     if (File::exists($filePath)) {
+    //         File::delete($filePath);
+    //     }
+    //     if (!$success) {
+    //         return back()->with('error', 'Something went wrong!');
+    //     }
+    //     return redirect('/visions')->with('success', "Successfully delete a vision");
+    // }
 
     public function create_slug(Request $request)
     {

@@ -31,6 +31,11 @@ class BenefitController extends Controller
 
     public function store(Request $request)
     {
+        $benefits_count = Benefit::all()->count();
+        if ($benefits_count == 3) {
+            return back()->with('error', 'Maximum benefits exceeded!');
+        }
+
         $validated_data = $request->validate([
             "title" => "required|min:3",
             "slug" => "required|min:3|unique:benefits,slug",
@@ -102,19 +107,19 @@ class BenefitController extends Controller
         return redirect('/benefits')->with('success', "Successfully update benefit");
     }
 
-    public function destroy(Benefit $benefit)
-    {
-        $success = Benefit::destroy($benefit->id);
+    // public function destroy(Benefit $benefit)
+    // {
+    //     $success = Benefit::destroy($benefit->id);
 
-        $filePath = public_path("images/$benefit->icon");
-        if (File::exists($filePath)) {
-            File::delete($filePath);
-        }
-        if (!$success) {
-            return back()->with('error', 'Something went wrong!');
-        }
-        return redirect('/benefits')->with('success', "Successfully delete a benefit");
-    }
+    //     $filePath = public_path("images/$benefit->icon");
+    //     if (File::exists($filePath)) {
+    //         File::delete($filePath);
+    //     }
+    //     if (!$success) {
+    //         return back()->with('error', 'Something went wrong!');
+    //     }
+    //     return redirect('/benefits')->with('success', "Successfully delete a benefit");
+    // }
 
     public function create_slug(Request $request)
     {

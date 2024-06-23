@@ -25,4 +25,6 @@ class Vision extends Model
             ]
         ];
     }
+
+    protected $appends = ['public_image'];
 }

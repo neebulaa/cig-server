@@ -114,9 +114,9 @@ Route::group(['middleware' => "auth"], function () {
     // visions
     Route::get('/visions/create_slug', [VisionController::class, 'create_slug']);
     Route::get('/visions', [VisionController::class, 'index']);
-    Route::post('/visions', [VisionController::class, 'store']);
+    // Route::post('/visions', [VisionController::class, 'store']);
     Route::put('/visions/{vision:slug}', [VisionController::class, 'update']);
-    Route::delete('/visions/{vision:slug}', [VisionController::class, 'destroy']);
+    // Route::delete('/visions/{vision:slug}', [VisionController::class, 'destroy']);
     Route::get('/visions/create', [VisionController::class, 'create']);
     Route::get('/visions/edit/{vision:slug}', [VisionController::class, 'edit']);
     Route::get('/visions/{vision:slug}', [VisionController::class, 'show']);
@@ -124,9 +124,9 @@ Route::group(['middleware' => "auth"], function () {
     // benefits
     Route::get('/benefits/create_slug', [BenefitController::class, 'create_slug']);
     Route::get('/benefits', [BenefitController::class, 'index']);
-    Route::post('/benefits', [BenefitController::class, 'store']);
+    // Route::post('/benefits', [BenefitController::class, 'store']);
     Route::put('/benefits/{benefit:slug}', [BenefitController::class, 'update']);
-    Route::delete('/benefits/{benefit:slug}', [BenefitController::class, 'destroy']);
+    // Route::delete('/benefits/{benefit:slug}', [BenefitController::class, 'destroy']);
     Route::get('/benefits/create', [BenefitController::class, 'create']);
     Route::get('/benefits/edit/{benefit:slug}', [BenefitController::class, 'edit']);
     Route::get('/benefits/{benefit:slug}', [BenefitController::class, 'show']);
