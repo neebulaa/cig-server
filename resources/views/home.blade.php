@@ -20,7 +20,7 @@
         }
 
         .pinpoint-draggable {
-            z-index: 1;
+            /* z-index: 1; */
             position: absolute;
             width: 30px;
             top: calc(var(--top-percent) * 1%);
@@ -48,34 +48,71 @@
         }
 
         .pinpoint-draggable:has(*:not(.identifier):not(.identifier *):hover) .identifier {
-            opacity: 1;
             display: block;
         }
 
         .pinpoint-draggable .identifier {
-            display: none;
             text-align: center;
-            left: 50%;
-            translate: -50%;
-            top: 105%;
             width: 150px;
             position: absolute;
             padding: .5rem;
             border: 1px solid gray;
             background: #111;
             border-radius: 8px;
+            display: none;
+            z-index: 100;
+        }
+
+        .pinpoint-draggable.identifier-center .identifier {
+            left: 50%;
+            translate: -50%;
+        }
+
+        .pinpoint-draggable.identifier-left .identifier {
+            left: 0;
+        }
+
+        .pinpoint-draggable.identifier-right .identifier {
+            right: 0;
+        }
+
+        .pinpoint-draggable.identifier-top .identifier {
+            bottom: 105%;
+        }
+
+        .pinpoint-draggable.identifier-bottom .identifier {
+            top: 105%;
         }
 
         .pinpoint-draggable .identifier::before {
             content: '';
             position: absolute;
-            top: -10px;
             width: 10px;
             height: 10px;
             background: var(--color);
             clip-path: polygon(50% 0, 50% 0, 100% 100%, 0 100%);
+        }
+
+        .pinpoint-draggable.identifier-center .identifier::before {
             left: 50%;
             translate: -50%;
+        }
+
+        .pinpoint-draggable.identifier-left .identifier::before {
+            left: 10px;
+        }
+
+        .pinpoint-draggable.identifier-right .identifier::before {
+            right: 10px;
+        }
+
+        .pinpoint-draggable.identifier-top .identifier::before {
+            bottom: -10px;
+            rotate: 180deg;
+        }
+
+        .pinpoint-draggable.identifier-bottom .identifier::before {
+            top: -10px;
         }
 
         @keyframes fadeInAndOut {
@@ -203,11 +240,11 @@
         </div>
         <div class="bg-[#111] rounded-md overflow-hidden">
             <div id="map" class="rounded overflow-hidden">
-                {{-- <img src="{{ asset('images/map-pin.png') }}" alt="pin map" id="pinpoint-draggable" draggable="false"> --}}
+                <img src="{{ asset('images/map-white.png') }}" alt="white map" id="map-img" />
                 @foreach ($pinpoints as $pinpoint)
                     @if ($pinpoint->region->type === 'province')
                         <div id="pinpoint-draggable-{{ $pinpoint->region->slug }}"
-                            class="pinpoint-draggable {{ $pinpoint->is_active ? 'opacity-100 !z-10' : 'opacity-0' }}">
+                            class="pinpoint-draggable {{ $pinpoint->is_active ? 'block' : 'hidden' }}">
                             <img src="{{ asset('images/province-pin.png') }}" alt="pin map" draggable="false">
                             @if ($pinpoint->region->comodities->count())
                                 <div class="comodities absolute top-1 left-1/2 -translate-x-1/2"
@@ -240,7 +277,7 @@
 
                     @if ($pinpoint->region->type === 'harbor')
                         <div id="pinpoint-draggable-{{ $pinpoint->region->slug }}"
-                            class="pinpoint-draggable {{ $pinpoint->is_active ? 'opacity-100 !z-10' : 'opacity-0' }}">
+                            class="pinpoint-draggable {{ $pinpoint->is_active ? 'block' : 'hidden' }}">
                             <img src="{{ asset('images/harbor-pin.png') }}" alt="pin map" draggable="false">
 
                             <div class="identifier text-xs" style="--color: #111;">
@@ -251,7 +288,7 @@
                         </div>
                     @endif
                 @endforeach
-                <img src="{{ asset('images/map-white.png') }}" alt="white map" id="map-img" />
+
             </div>
         </div>
         <script>
@@ -276,20 +313,29 @@
                     let pinpointDraggableImageRect{{ $pinpoint->id }} = pinpointDraggableImage{{ $pinpoint->id }}
                         .getBoundingClientRect();
 
+                    let topPercent = posYCoordinate{{ $pinpoint->id }} -
+                        (pinpointDraggableImageRect{{ $pinpoint->id }})
+                        .height /
+                        pinpoinMapRect.height * 100;
+
                     (pinpointDraggableImage{{ $pinpoint->id }})
-                    .style.setProperty('--top-percent', posYCoordinate{{ $pinpoint->id }} -
-                        (pinpointDraggableImageRect{{ $pinpoint->id }}).height /
-                        pinpoinMapRect.height * 100);
+                    .style.setProperty('--top-percent', topPercent);
+                    (pinpointDraggableImage{{ $pinpoint->id }})
+                    .classList.add(`identifier-${topPercent > 70 ? 'top' : 'bottom'}`);
 
                     (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--top-px', (
                         posYCoordinate{{ $pinpoint->id }} -
                         (pinpointDraggableImageRect{{ $pinpoint->id }}).height /
                         pinpoinMapRect.height * 100) / 100 * pinpoinMapRect.height);
 
-                    (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--left-percent',
-                        posXCoordinate{{ $pinpoint->id }} -
+                    let leftPercent = posXCoordinate{{ $pinpoint->id }} -
                         ((pinpointDraggableImageRect{{ $pinpoint->id }}).width / 2) /
-                        pinpoinMapRect.width * 100);
+                        pinpoinMapRect.width * 100;
+
+                    (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--left-percent',
+                        leftPercent);
+                    (pinpointDraggableImage{{ $pinpoint->id }}).classList.add(`identifier-${
+                    leftPercent > 30 && leftPercent < 70 ? 'center' : leftPercent > 70 ? 'right' : 'left'}`);
 
                     (pinpointDraggableImage{{ $pinpoint->id }}).style.setProperty('--left-px', (
                         posXCoordinate{{ $pinpoint->id }} - (

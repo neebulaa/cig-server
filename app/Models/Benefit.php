@@ -25,4 +25,6 @@ class Benefit extends Model
             ]
         ];
     }
+
+    protected $appends = ['public_icon'];
 }

@@ -27,5 +27,10 @@ class Comodity extends Model
         ];
     }
 
+    public function regions()
+    {
+        return $this->belongsToMany(Region::class, 'region_comodities', 'comodity_id', 'region_id');
+    }
+
     protected $appends = ['public_icon'];
 }

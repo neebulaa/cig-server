@@ -31,4 +31,6 @@ class Social extends Model
     {
         return asset("images/" . self::$social_medias[$this->type]);
     }
+
+    protected $appends = ['public_icon'];
 }

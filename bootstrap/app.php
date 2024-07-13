@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\Cors;
 use App\Http\Middleware\EnsureIsOwner;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;

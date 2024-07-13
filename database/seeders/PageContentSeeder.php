@@ -15,277 +15,331 @@ class PageContentSeeder extends Seeder
     public function run(): void
     {
         // hero content
-        PageContent::create([
+        $pcht = PageContent::create([
             "key" => "hero-title",
             "page" => "main",
             "title" => "Hero content title (before hero image)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 1,
+            "page_content_id" => $pcht->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Exporter"
         ]);
 
-        PageContent::create([
+        $pchd = PageContent::create([
             "key" => "hero-description",
             "page" => "main",
             "title" => "Hero content description (after hero image)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 2,
+            "page_content_id" => $pchd->id,
             "type" => "textarea",
             "name" => "Description",
             "value" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi illo quaerat at expedita, consequuntur quas eos explicabo quis incidunt fuga quod facere aperiam itaque unde aut iure tempora distinctio provident magnam necessitatibus eius cupiditate alias. Dicta quam, itaque sint nostrum qui soluta suscipit. Iusto, quibusdam?"
         ]);
 
-        PageContent::create([
+        $pchlb = PageContent::create([
             "key" => "hero-left_button",
             "page" => "main",
             "title" => "Hero content left button",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 3,
+            "page_content_id" => $pchlb->id,
             "type" => "text",
             "name" => "Text",
             "value" => "View our products"
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 3,
+            "page_content_id" => $pchlb->id,
             "type" => "link",
             "name" => "Link",
-            "value" => "#products"
+            "value" => "/products"
         ]);
 
-        PageContent::create([
+        $pchrb = PageContent::create([
             "key" => "hero-right_button",
             "page" => "main",
             "title" => "Hero content right button",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 4,
+            "page_content_id" => $pchrb->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Join us"
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 4,
+            "page_content_id" => $pchrb->id,
             "type" => "link",
             "name" => "Link",
-            "value" => "#join-us"
+            "value" => "#location"
         ]);
 
         // hero slider content
-        PageContent::create([
+        $pchs = PageContent::create([
             "key" => "hero-slider",
             "page" => "main",
             "title" => "Hero content slider text",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 5,
+            "page_content_id" => $pchs->id,
             "type" => "text",
             "name" => "Text 1",
             "value" => "Export"
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 5,
+            "page_content_id" => $pchs->id,
             "type" => "text",
             "name" => "Text 2",
             "value" => "Diligent"
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 5,
+            "page_content_id" => $pchs->id,
             "type" => "text",
             "name" => "Text 3",
             "value" => "Creative"
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 5,
+            "page_content_id" => $pchs->id,
             "type" => "text",
             "name" => "Text 4",
             "value" => "Integrity"
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 5,
+            "page_content_id" => $pchs->id,
             "type" => "text",
             "name" => "Text 5",
             "value" => "International"
         ]);
 
+        // pinpoints content
+        $pcpnt = PageContent::create([
+            "key" => "pinpoints-title",
+            "page" => "main",
+            "title" => "Pin points content title",
+        ]);
+
+        PageContentValue::create([
+            "page_content_id" => $pcpnt->id,
+            "type" => "text",
+            "name" => "Text",
+            "value" => "Pinpoints",
+        ]);
+
+        $pcpntg = PageContent::create([
+            "key" => "pinpoints-tagline",
+            "page" => "main",
+            "title" => "Pin points content tagline (after title)",
+        ]);
+
+        PageContentValue::create([
+            "page_content_id" => $pcpntg->id,
+            "type" => "text",
+            "name" => "Text",
+            "value" => "Our region with its speciality",
+        ]);
+
+        // h ighlighted regions content
+        $pchrt = PageContent::create([
+            "key" => "highlighted_regions-title",
+            "page" => "main",
+            "title" => "Highlighted Region content title (In Mobile)",
+        ]);
+
+        PageContentValue::create([
+            "page_content_id" => $pchrt->id,
+            "type" => "text",
+            "name" => "Text",
+            "value" => "Highlighted Regions",
+        ]);
+
+        $pchrtg = PageContent::create([
+            "key" => "highlighted_regions-tagline",
+            "page" => "main",
+            "title" => "Highlighted Region content tagline (after title)",
+        ]);
+
+        PageContentValue::create([
+            "page_content_id" => $pchrtg->id,
+            "type" => "text",
+            "name" => "Text",
+            "value" => "The best places on Indonesia",
+        ]);
+
         // about content
-        PageContent::create([
+        $pcat = PageContent::create([
             "key" => "about-title",
             "page" => "main",
             "title" => "About content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 6,
+            "page_content_id" => $pcat->id,
             "type" => "text",
             "name" => "Text",
             "value" => "About Us",
         ]);
 
-        PageContent::create([
+        $pcatg = PageContent::create([
             "key" => "about-tagline",
             "page" => "main",
             "title" => "About content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 7,
+            "page_content_id" => $pcatg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "The best exporter",
         ]);
 
-        PageContent::create([
+        $pcad = PageContent::create([
             "key" => "about-description",
             "page" => "main",
             "title" => "About content description / bio",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 8,
+            "page_content_id" => $pcad->id,
             "type" => "textarea",
             "name" => "Description",
             "value" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis expedita excepturi voluptatibus! Blanditiis earum explicabo veniam architecto velit, autem recusandae at nulla sapiente error, eveniet adipisci vitae ut dolor doloremque voluptatem illum accusamus. Nesciunt cupiditate dicta voluptatem fugiat commodi, reprehenderit eos architecto illum ipsum animi, sapiente dolor sed ab quam modi perspiciatis voluptatibus itaque quaerat culpa! Exercitationem, option.",
         ]);
 
         // our vision content
-        PageContent::create([
+        $pcvt = PageContent::create([
             "key" => "our_vision-title",
             "page" => "main",
             "title" => "Our Vision content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 9,
+            "page_content_id" => $pcvt->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Our Vision",
         ]);
 
-        PageContent::create([
+        $pcvtg = PageContent::create([
             "key" => "our_vision-tagline",
             "page" => "main",
             "title" => "Our Vision content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 10,
+            "page_content_id" => $pcvtg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "This is the future of CIG",
         ]);
 
         // benefits content
-        PageContent::create([
+        $pcbt = PageContent::create([
             "key" => "benefits-title",
             "page" => "main",
             "title" => "Benefits content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 11,
+            "page_content_id" => $pcbt->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Benefits",
         ]);
 
-        PageContent::create([
+        $pcbtg = PageContent::create([
             "key" => "benefits-tagline",
             "page" => "main",
             "title" => "Benefits content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 12,
+            "page_content_id" => $pcbtg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Awesome thing you get from us",
         ]);
 
         // products content
-        PageContent::create([
+        $pcpt = PageContent::create([
             "key" => "products-title",
             "page" => "main",
             "title" => "Products content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 13,
+            "page_content_id" => $pcpt->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Products",
         ]);
 
-        PageContent::create([
+        $pcptg = PageContent::create([
             "key" => "products-tagline",
             "page" => "main",
             "title" => "Products content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 14,
+            "page_content_id" => $pcptg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Our Products",
         ]);
 
-        PageContent::create([
+        $pcpb = PageContent::create([
             "key" => "products-button",
             "page" => "main",
             "title" => "Products button (after tagline)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 15,
+            "page_content_id" => $pcpb->id,
             "type" => "text",
             "name" => "Text",
             "value" => "View all products",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 15,
+            "page_content_id" => $pcpb->id,
             "type" => "link",
             "name" => "Link",
             "value" => "/products",
         ]);
 
         // our comodity content
-        PageContent::create([
+        $pcct = PageContent::create([
             "key" => "comodity-title",
             "page" => "main",
             "title" => "Comodity content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 16,
+            "page_content_id" => $pcct->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Our Comodity",
         ]);
 
-        PageContent::create([
+        $pcctg = PageContent::create([
             "key" => "comodity-tagline",
             "page" => "main",
             "title" => "Comodity content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 17,
+            "page_content_id" => $pcctg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "CIG's Specialities",
@@ -293,306 +347,279 @@ class PageContentSeeder extends Seeder
 
 
         // our team content
-        PageContent::create([
+        $pcott = PageContent::create([
             "key" => "our_team-title",
             "page" => "main",
             "title" => "Our team content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 18,
+            "page_content_id" => $pcott->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Meet Our Team",
         ]);
 
-        PageContent::create([
+        $pcottg = PageContent::create([
             "key" => "our_team-tagline",
             "page" => "main",
             "title" => "Our team content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 19,
+            "page_content_id" => $pcottg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Here is the best person",
         ]);
 
         // our client content
-        PageContent::create([
+        $pcoct = PageContent::create([
             "key" => "our_client-title",
             "page" => "main",
             "title" => "Our client content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 20,
+            "page_content_id" => $pcoct->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Meet Our Client",
         ]);
 
-        PageContent::create([
+        $pcoctg = PageContent::create([
             "key" => "our_client-tagline",
             "page" => "main",
             "title" => "Our client content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 21,
+            "page_content_id" => $pcoctg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Here is our half",
         ]);
 
         // article content
-        PageContent::create([
+        $pcmat = PageContent::create([
             "key" => "article-title",
             "page" => "main",
             "title" => "Article content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 22,
+            "page_content_id" => $pcmat->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Article",
         ]);
 
-        PageContent::create([
+        $pcmatg = PageContent::create([
             "key" => "article-tagline",
             "page" => "main",
             "title" => "Article content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 23,
+            "page_content_id" => $pcmatg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Our latest posts",
         ]);
 
-        PageContent::create([
+        $pcmab = PageContent::create([
             "key" => "article-button",
             "page" => "main",
             "title" => "Article button (after tagline)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 24,
+            "page_content_id" => $pcmab->id,
             "type" => "text",
             "name" => "Text",
             "value" => "View all article",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 24,
+            "page_content_id" => $pcmab->id,
             "type" => "link",
             "name" => "Link",
-            "value" => "/posts",
+            "value" => "/articles",
         ]);
 
         //  certification content
-        PageContent::create([
+        $pcct = PageContent::create([
             "key" => "certification-title",
             "page" => "main",
             "title" => "Certification content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 25,
+            "page_content_id" => $pcct->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Certification",
         ]);
 
-        PageContent::create([
+        $pcctg = PageContent::create([
             "key" => "certification-tagline",
             "page" => "main",
             "title" => "Certification content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 26,
+            "page_content_id" => $pcctg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Our certifications",
         ]);
 
         //  location content
-        PageContent::create([
+        $pclt = PageContent::create([
             "key" => "location-title",
             "page" => "main",
             "title" => "Location content title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 27,
+            "page_content_id" => $pclt->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Location",
         ]);
 
-        PageContent::create([
+        $pcltg = PageContent::create([
             "key" => "location-tagline",
             "page" => "main",
             "title" => "Location content tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 28,
+            "page_content_id" => $pcltg->id,
             "type" => "text",
             "name" => "Text",
             "value" => "This is where we work",
         ]);
 
         // products page
-        PageContent::create([
+        $pcpmt = PageContent::create([
             "key" => "main-title",
             "page" => "products",
             "title" => "Products page title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 29,
+            "page_content_id" => $pcpmt->id,
             "type" => "text",
             "name" => "Text",
-            "value" => "Our Products",
+            "value" => "Products Catalog",
         ]);
 
-        PageContent::create([
+        $pcpmd = PageContent::create([
             "key" => "main-description",
             "page" => "products",
             "title" => "Products page description",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 30,
+            "page_content_id" => $pcpmd->id,
             "type" => "textarea",
             "name" => "Description",
-            "value" => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id excepturi impedit at officia pariatur libero ullam. Dolorem quos fuga fugiat aperiam quaerat provident, magnam quibusdam.",
+            "value" => "Discover a wide range of Indonesia products in our comprehensive catalog. From traditional crafts to modern goods, find the best of Indonesia here.",
         ]);
 
-        PageContent::create([
+        $pccf = PageContent::create([
             "key" => "catalog-filters",
             "page" => "products",
             "title" => "Products page filter",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 31,
+            "page_content_id" => $pccf->id,
             "type" => "table_filters",
             "name" => "Can Filter by",
             "value" => "comodities,regions",
         ]);
 
         // article / post page
-        PageContent::create([
+        $pcamt = PageContent::create([
             "key" => "main-title",
             "page" => "articles",
             "title" => "Articles page title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 32,
+            "page_content_id" => $pcamt->id,
             "type" => "text",
             "name" => "Text",
             "value" => "Articles",
         ]);
 
-        PageContent::create([
+        $pcamd = PageContent::create([
             "key" => "main-description",
             "page" => "articles",
             "title" => "Articles page description",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 33,
+            "page_content_id" => $pcamd->id,
             "type" => "textarea",
             "name" => "Description",
-            "value" => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id excepturi impedit at officia pariatur libero ullam. Dolorem quos fuga fugiat aperiam quaerat provident, magnam quibusdam.",
+            "value" => "Stay up-to-date on the latest products, business insights, activities, and more with our insightful blog posts",
         ]);
 
-        // article page - recent
-        PageContent::create([
-            "key" => "recent-title",
+        // article page - latest
+        $pcalt =  PageContent::create([
+            "key" => "latest-title",
             "page" => "articles",
-            "title" => "Articles page section recent title",
+            "title" => "Articles page section latest title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 34,
+            "page_content_id" => $pcalt->id,
             "type" => "text",
             "name" => "Text",
-            "value" => "Recent",
+            "value" => "Latest",
         ]);
 
-        PageContent::create([
-            "key" => "recent-tagline",
+        $pcaltg = PageContent::create([
+            "key" => "latest-tagline",
             "page" => "articles",
-            "title" => "Articles page section recent tagline (after title)",
+            "title" => "Articles page section latest tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 35,
+            "page_content_id" => $pcaltg->id,
             "type" => "text",
             "name" => "Text",
-            "value" => "Latest of our news",
+            "value" => "Follow up with our latest news",
         ]);
 
-        // articles page - activities
-        PageContent::create([
-            "key" => "activities-title",
+        // articles page - travel more
+        $pctmt = PageContent::create([
+            "key" => "travel_more-title",
             "page" => "articles",
-            "title" => "Articles page section activities title",
+            "title" => "Articles page section travel more title",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 36,
+            "page_content_id" => $pctmt->id,
             "type" => "text",
             "name" => "Text",
-            "value" => "Activities",
+            "value" => "Travel More",
         ]);
 
-        PageContent::create([
-            "key" => "activities-tagline",
+        $pctmtg = PageContent::create([
+            "key" => "travel_more-tagline",
             "page" => "articles",
-            "title" => "Articles page section activities tagline (after title)",
+            "title" => "Articles page section travel more tagline (after title)",
         ]);
 
         PageContentValue::create([
-            "page_content_id" => 37,
+            "page_content_id" => $pctmtg->id,
             "type" => "text",
             "name" => "Text",
-            "value" => "What we have done?",
-        ]);
-
-        // pinpoints content
-        PageContent::create([
-            "key" => "pinpoints-title",
-            "page" => "main",
-            "title" => "Pin points content title",
-        ]);
-
-        PageContentValue::create([
-            "page_content_id" => 38,
-            "type" => "text",
-            "name" => "Text",
-            "value" => "Pinpoints",
-        ]);
-
-        PageContent::create([
-            "key" => "pinpoints-tagline",
-            "page" => "main",
-            "title" => "Pin points content tagline (after title)",
-        ]);
-
-        PageContentValue::create([
-            "page_content_id" => 39,
-            "type" => "text",
-            "name" => "Text",
-            "value" => "Our region with its speciality",
+            "value" => "Our other posts for you",
         ]);
     }
 }

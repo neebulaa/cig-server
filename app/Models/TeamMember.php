@@ -24,4 +24,6 @@ class TeamMember extends Model
             ]
         ];
     }
+
+    public $appends = ['public_profile_image'];
 }

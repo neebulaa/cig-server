@@ -24,4 +24,6 @@ class Certification extends Model
             ]
         ];
     }
+
+    protected $appends = ['public_image'];
 }

@@ -39,6 +39,7 @@ class CompanyController extends Controller
             "about" => "required|min:3",
             "phone" => "required|min:3",
             "address" => "required|min:3",
+            "iframe_src" => "required",
             "logo" => "required|image|file:1024"
         ]);
 
@@ -74,6 +75,7 @@ class CompanyController extends Controller
             "about" => "required|min:3",
             "phone" => "required|min:3",
             "address" => "required|min:3",
+            "iframe_src" => "required",
             "logo" => "image|file:1024"
         ]);
 

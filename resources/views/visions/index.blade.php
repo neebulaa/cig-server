@@ -11,10 +11,10 @@
         </div>
     @endif
     <hr class="mt-4 mb-4">
+    @include('partials.search', [
+        'page' => 'visions',
+    ])
     @if ($visions->count())
-        @include('partials.search', [
-            'page' => 'visions',
-        ])
         <p class="mb-2 text-blue-gray-600 text-sm">Visions found: {{ $total_items }}</p>
 
         <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">

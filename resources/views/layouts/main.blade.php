@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/cig.png') }}" />
     <title>PT CIG | Back office</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -12,6 +13,11 @@
     {{-- trix --}}
     <link rel="stylesheet" href="{{ asset('css/trix.css') }}">
     <script src="{{ asset('js/trix.js') }}"></script>
+    <style>
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -127,6 +133,9 @@
                 })
             }
         }
+        document.addEventListener('trix-file-accept', function(e) {
+            e.preventDefault();
+        })
     </script>
 </body>
 

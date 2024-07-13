@@ -14,10 +14,10 @@
         </div>
     @endif
     <hr class="mt-4 mb-4">
+    @include('partials.search', [
+        'page' => 'posts',
+    ])
     @if ($posts->count())
-        @include('partials.search', [
-            'page' => 'posts',
-        ])
         <p class="mb-2 text-blue-gray-600 text-sm">Posts found: {{ $total_items }}</p>
         <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
@@ -67,8 +67,8 @@
                                 </td>
                                 <td class="py-3 px-5 border-b border-blue-gray-50 max-w-[600px]">
                                     <p class="block antialiased font-sans text-sm font-medium text-blue-gray-600">
-                                        {{ substr($post->description, 0, 150) }}
-                                        {{ strlen($post->description) > 150 ? '...' : '' }}</p>
+                                        {!! substr(strip_tags($post->description), 0, 150) !!}
+                                        {!! strlen(strip_tags($post->description)) > 150 ? '...' : '' !!}</p>
                                 </td>
                                 <td
                                     class="py-3 px-5 border-b border-blue-gray-50 text-blue-gray-600 font-sans text-xs font-semibold w-[100px] max-w-full">

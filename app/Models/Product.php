@@ -29,4 +29,6 @@ class Product extends Model
             ]
         ];
     }
+
+    protected $appends = ['public_image'];
 }

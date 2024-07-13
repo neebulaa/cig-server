@@ -14,10 +14,10 @@
         </div>
     @endif
     <hr class="mt-4 mb-4">
+    @include('partials.search', [
+        'page' => 'categories',
+    ])
     @if ($categories->count())
-        @include('partials.search', [
-            'page' => 'categories',
-        ])
         <p class="mb-2 text-blue-gray-600 text-sm">Post Categories found: {{ $total_items }}</p>
 
         <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">

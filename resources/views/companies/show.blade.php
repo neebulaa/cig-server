@@ -7,6 +7,8 @@
         to index</a>
     <hr class="mt-4 mb-4">
 
+    <iframe class="rounded-md shadow-md mb-4 w-full h-[300px]" src="{{ $company->iframe_src }}" style=" border: 0 " loading="lazy"></iframe>
+
     <div class="flex flex-wrap gap-4">
         <img class="object-contain w-full bg-black rounded-lg max-w-24 max-h-24 aspect-square"
             src="{{ $company->public_logo }}" alt="image-{{ $company->name }}" class="">

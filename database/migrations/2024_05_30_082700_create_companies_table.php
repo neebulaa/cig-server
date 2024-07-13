@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('about');
             $table->string('phone');
             $table->text('address');
+            $table->text('iframe_src');
             $table->string('logo')->nullable();
             $table->timestamps();
         });

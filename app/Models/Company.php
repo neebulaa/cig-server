@@ -24,4 +24,6 @@ class Company extends Model
             ]
         ];
     }
+
+    protected $appends = ['public_logo'];
 }

@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             "team_members",
             "visions",
         ];
-        
+
         foreach ($folders as $folder) {
             if (File::exists(public_path("images/$folder"))) {
                 File::deleteDirectory(public_path("images/$folder"));
@@ -85,7 +85,8 @@ class DatabaseSeeder extends Seeder
             "about" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore temporibus impedit voluptatem atque officia laboriosam eos quasi nesciunt dignissimos corrupti!",
             "address" => "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             "phone" => "+62-123-1234-123",
-            "logo" => 'cig.png'
+            "logo" => 'cig.png',
+            "iframe_src" => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8178486225625!2d109.32138211100892!3d-0.027861435546202098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d58fa2f8f31cd%3A0x2ba759cc67b0a219!2sNeo%20Shabu-Shabu%20Steak%20%26%20Shake!5e0!3m2!1sid!2sid!4v1719386880277!5m2!1sid!2sid"
         ]);
 
         // post categories
@@ -139,14 +140,15 @@ class DatabaseSeeder extends Seeder
 
 
         // products
-        Product::factory(10)->create();
+        $number_of_products = 15;
+        Product::factory($number_of_products)->create();
 
         // comodities
         Comodity::factory(10)->create();
         Social::factory(4)->create();
 
         // product comodities
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= $number_of_products; $i++) {
             $number_of_comodities = random_int(1, 5);
             for ($j = 0; $j < $number_of_comodities; $j++) {
                 ProductComodity::create([

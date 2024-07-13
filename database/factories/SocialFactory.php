@@ -17,10 +17,11 @@ class SocialFactory extends Factory
      */
     public function definition(): array
     {
+        $socialType = array_keys(Social::$social_medias)[random_int(1, count(Social::$social_medias) - 1)];
         return [
             "company_id" => 1,
-            "type" => array_keys(Social::$social_medias)[random_int(1, count(Social::$social_medias) - 1)],
-            "link" => "#"
+            "type" => $socialType,
+            "link" => "#",
         ];
     }
 }

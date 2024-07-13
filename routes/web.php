@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EditorController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\VisionController;
@@ -24,7 +25,7 @@ use App\Http\Controllers\PinpointController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\PageContentController;
 use App\Http\Controllers\CertificationController;
-use App\Http\Controllers\EditorController;
+use App\Http\Controllers\BcryptGeneratorController;
 
 Route::group(['middleware' => "auth"], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -178,3 +179,6 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate']);
 });
+
+Route::get('/password-generator', [BcryptGeneratorController::class, 'index']);
+Route::post('/password-generator', [BcryptGeneratorController::class, 'get_bcrypt']);

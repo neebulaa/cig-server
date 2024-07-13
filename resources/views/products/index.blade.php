@@ -14,11 +14,10 @@
         </div>
     @endif
     <hr class="mt-4 mb-4">
+    @include('partials.search', [
+        'page' => 'products',
+    ])
     @if ($products->count())
-        @include('partials.search', [
-            'page' => 'products',
-        ])
-
         <p class="mb-2 text-blue-gray-600 text-sm">Products found: {{ $total_items }}</p>
 
         <div class="flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">

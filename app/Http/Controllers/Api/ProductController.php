@@ -10,27 +10,19 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all()->slice(0, 10);
+        $products = Product::all()->slice(0, 12);
         return response([
             "message" => "Get all products success",
             "products" => $products
         ]);
     }
 
-    public function catalog(Request $request)
+    public function catalog()
     {
-        $products = Product::with('comodities')->latest();
-        if ($request->search) {
-            $products->where('name', 'LIKE', "%$request->search%")
-                ->orWhere('description', 'LIKE', "%$request->search%")
-                ->orWhere(function ($query) use ($request) {
-                    $query->whereHas('comodities', function ($q) use ($request) {
-                        return $q->where('name', 'LIKE', "%$request->search%");
-                    });
-                });
-        }
+        $products = Product::with('comodities',  'comodities.regions')->latest()->get();
         return response([
-            "products" => $products->paginate(2)->withQueryString(),
+            "message" => "Get all products success",
+            "products" => $products,
         ]);
     }
 }

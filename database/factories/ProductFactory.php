@@ -32,7 +32,7 @@ class ProductFactory extends Factory
         return [
             "name" => fake()->sentence(random_int(2, 4)),
             "slug" => fake()->slug(),
-            "description" => fake()->sentences(random_int(2, 5), true),
+            "description" => fake()->sentence(random_int(8, 10), true),
             "image" => $uploadedImagePath
         ];
     }

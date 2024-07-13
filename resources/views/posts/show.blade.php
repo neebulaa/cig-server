@@ -21,7 +21,7 @@
                     No Category
                 </p>
             @endif
-            <p class="mb-4 text-blue-gray-700">{{ $post->description }}</p>
+            <p class="mb-4 text-blue-gray-700 pt-3 border-t">{!! $post->description !!}</p>
         </div>
     </div>
 @endsection

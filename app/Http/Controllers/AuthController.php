@@ -16,7 +16,9 @@ class AuthController extends Controller
     {
         $validatedData = $request->validate([
             "username" => "required|min:3",
-            "password" => "required|min:3",
+            "password" => "required|min:3|regex:/^[a-z0-9_.]+$/i",
+        ], [
+            "password.regex" => "Password can only contains alphanumeric, _, or ."
         ]);
 
         if (Auth::attempt($validatedData)) {

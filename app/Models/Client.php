@@ -24,4 +24,6 @@ class Client extends Model
             ]
         ];
     }
+
+    protected $appends = ['public_logo'];
 }
